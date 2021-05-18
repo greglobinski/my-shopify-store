@@ -27,9 +27,14 @@ import {
   addToCartStyle,
   metaSection,
   productDescription,
+  addressBox,
 } from "./product-page.module.css"
+import { useGetAddress } from "../../../hooks/useGetAddress"
+import { useEstimateRate } from "../../../hooks/useEstimateRate"
 
 export default function Product({ data: { product, suggestions } }) {
+  const { rates, address } = useEstimateRate()
+
   const {
     options,
     variants,
@@ -207,6 +212,13 @@ export default function Product({ data: { product, suggestions } }) {
                 ))}
               </span>
             </div>
+
+            <div className={addressBox}>
+              {address && <pre>{JSON.stringify(address, null, 2)}</pre>}
+            </div>
+            <div className={addressBox}>
+              {rates && <pre>{JSON.stringify(rates, null, 2)}</pre>}
+            </div>
           </div>
         </div>
       </div>
@@ -215,7 +227,7 @@ export default function Product({ data: { product, suggestions } }) {
 }
 
 export const query = graphql`
-  query($id: String!, $productType: String!) {
+  query ($id: String!, $productType: String!) {
     product: shopifyProduct(id: { eq: $id }) {
       title
       description

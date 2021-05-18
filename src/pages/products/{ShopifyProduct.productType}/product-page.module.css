@@ -178,3 +178,9 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+.addressBox {
+  padding: 0.5rem 1rem;
+  margin-top: 2rem;
+  border: 2px dashed red;
+}
