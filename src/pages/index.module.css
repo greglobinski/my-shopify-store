@@ -38,3 +38,9 @@
 .deployButton {
   margin-top: var(--space-lg);
 }
+
+.message {
+  display: flex;
+  border: 1px solid red;
+  padding: 1.5rem 3rem;
+}

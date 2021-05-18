@@ -8,7 +8,9 @@ import {
   callOut,
   callToAction,
   deployButton,
+  message,
 } from "./index.module.css"
+import { useGetAddress } from "../hooks/useGetAddress"
 
 export const query = graphql`
   query {
@@ -20,6 +22,8 @@ export const query = graphql`
   }
 `
 export default function IndexPage({ data }) {
+  const address = useGetAddress()
+
   return (
     <Layout>
       <div className={container}>
@@ -41,6 +45,14 @@ export default function IndexPage({ data }) {
           </a>
         </p>
       </div>
+      <div className={container}>
+        {address && address.country_code === `pl` && (
+          <div
+            className={message}
+          >{`Regrettably, we do not ship to your country :(`}</div>
+        )}
+      </div>
+
       <ProductListing products={data.shopifyCollection.products} />
     </Layout>
   )
