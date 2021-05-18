@@ -8,8 +8,8 @@ export function useGetAddress() {
       const coordinates = await fetchCoordinates()
 
       const data = await fetchAddress({
-        latitude: coordinates.geoplugin_latitude,
-        longitude: coordinates.geoplugin_longitude,
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
       })
 
       setAddress(data.result.address)
@@ -35,6 +35,8 @@ async function fetchAddress({ latitude, longitude }) {
 }
 
 async function fetchCoordinates() {
-  const response = await fetch(`http://www.geoplugin.net/json.gp`)
+  const response = await fetch(
+    `https://geolocation-db.com/json/${process.env.GEOLOCATION_DB_API}`
+  )
   return await response.json()
 }
